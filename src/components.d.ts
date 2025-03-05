@@ -7,11 +7,22 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    DsfrAlert: typeof import('@gouvminint/vue-dsfr')['DsfrAlert']
+    DsfrButton: typeof import('@gouvminint/vue-dsfr')['DsfrButton']
+    DsfrConsent: typeof import('@gouvminint/vue-dsfr')['DsfrConsent']
     DsfrFieldset: typeof import('@gouvminint/vue-dsfr')['DsfrFieldset']
+    DsfrFooter: typeof import('@gouvminint/vue-dsfr')['DsfrFooter']
     DsfrHeader: typeof import('@gouvminint/vue-dsfr')['DsfrHeader']
     DsfrInput: typeof import('@gouvminint/vue-dsfr')['DsfrInput']
+    DsfrModal: typeof import('@gouvminint/vue-dsfr')['DsfrModal']
+    DsfrNavigation: typeof import('@gouvminint/vue-dsfr')['DsfrNavigation']
+    DsfrRadioButtonSet: typeof import('@gouvminint/vue-dsfr')['DsfrRadioButtonSet']
+    ModalConsent: typeof import('./components/modals/ModalConsent.vue')['default']
+    ModalInformation: typeof import('./components/modals/ModalInformation.vue')['default']
+    ModalTheme: typeof import('./components/modals/ModalTheme.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    VIcon: typeof import('oh-vue-icons')['OhVueIcon']
+    TextCopyToClipboard: typeof import('./components/TextCopyToClipboard.vue')['default']
+    VIcon: typeof import('@gouvminint/vue-dsfr')['VIcon']
   }
 }

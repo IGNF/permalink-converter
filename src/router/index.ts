@@ -1,21 +1,32 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { 
+  type RouteRecordRaw, 
+  createRouter, 
+  createWebHistory } 
+from 'vue-router'
 
-import Home from '../views/AppHome.vue'
-import AboutUs from '../views/AboutUs.vue'
+import Login from '../views/Login.vue'
+import Logout from '../views/Logout.vue'
+import PermalinkConverter from '../views/PermalinkConverter.vue'
 
-const MAIN_TITLE = 'Gabarit de démarrage VueDsfr'
+const MAIN_TITLE = 'Le service public des cartes et données du territoire | cartes.gouv.fr'
 
-const routes = [
+// liste des routes disponibles
+const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    name: 'Carte',
+    component: PermalinkConverter,
   },
   {
-    path: '/a-propos',
-    name: 'About',
-    component: AboutUs,
+    path: '/login',
+    name: 'Se connecter',
+    component: Login
   },
+  {
+    path: '/logout',
+    name: 'Se deconnecter',
+    component: Logout
+  }
 ]
 
 const router = createRouter({
@@ -24,6 +35,10 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => { // Cf. https://github.com/vueuse/head pour des transformations avancées de Head
+  if (to.fullPath === '/accueil' && !window.location.href.includes('/accueil')) {
+    window.open(to.href)
+    return false
+  }
   const specificTitle = to.meta.title ? `${to.meta.title} - ` : ''
   document.title = `${specificTitle}${MAIN_TITLE}`
 })

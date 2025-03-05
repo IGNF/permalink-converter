@@ -3,7 +3,7 @@
 
 <template>
   <div class="fr-container-md--fluid outer-div">
-    <div class="row">
+    <div class="row row-title">
       <h2 class="page-title fr-mb-15v">Insérez ci-dessous le permalien que vous voulez rendre compatible sur cartes.gouv.fr</h2>
     </div>
     <div class="row row2">
@@ -27,19 +27,27 @@
           >
           </DsfrInput>
         </DsfrFieldset>
+        <DsfrButton
+          primary
+          label="Convertir le permalien"/>
       </div>
       <div class="arrow-col">
-        <div></div>
-        <VIcon 
-        name="mdi:arrow-right"
-        scale="2"
-        class="fr-text-label--blue-france"
-        />  
-        <VIcon 
-        name="mdi:arrow-right"
-        scale="2"
-        class="fr-text-label--blue-france"
-        /> 
+        <DsfrButton
+          tertiary
+          no-outline>
+          <VIcon
+            scale="2"
+            name="tdesign:arrow-right"
+          />
+        </DsfrButton>
+        <DsfrButton
+          tertiary
+          no-outline>
+          <VIcon
+            scale="2"
+            name="tdesign:arrow-right"
+          />
+        </DsfrButton>
       </div>
       <div class="output-col">
         <DsfrFieldset class="fieldset-class">
@@ -77,6 +85,9 @@
 <style>
 .page-title {
   max-width: 661px;
+  border-bottom: 1px;
+  border-color: var(--background-default-grey);
+  justify-content: center;
 }
 .outer-div {
   width:100%;
@@ -88,16 +99,24 @@
 .row { 
  display: flex;
  flex-direction: row;
- justify-content: center;
+}
+
+.row-title {
+  justify-content: center;
 }
 
 .row2 {
   height: 60vh;
+  justify-content: space-evenly;
 }
 
 .input-col {
+  display: flex;
   flex-grow: 2;
   max-width: 30vw;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .arrow-col {
@@ -105,9 +124,13 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  align-items: center;
 }
 
 .output-col {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
   flex-grow: 2;
   max-width: 30vw;
 }
