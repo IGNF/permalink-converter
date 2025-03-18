@@ -1,104 +1,80 @@
 <script setup>
+import ResultModal from './ResultModal.vue';
+
+const permalink = ref("")
+const resultModal = ref(null)
+
+function onModalOpen() {
+  resultModal.value.onModalOpen()
+}
 </script>
 
 <template>
-  <div class="fr-container-md--fluid outer-div">
-    <div class="row row-title">
-      <h2 class="page-title fr-mb-15v">Insérez ci-dessous le permalien que vous voulez rendre compatible sur cartes.gouv.fr</h2>
-    </div>
-    <div class="row row2">
-      <div class="input-col">
-        <DsfrFieldset hintClass="hint-class">
-          <template #legend>Permalien issu du Géoportail à convertir</template>
-          <template #hint>
-            <span>
-              Format attendu :
-            </span>
-            <br>
-            <span>
-            https://www.geoportail.gouv.fr/carte?c=2.705841350773468,48.768240377068594&z=10&l0=GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2::GEOPORTAIL:OGC:WMTS(1)&l1=ORTHOIMAGERY.ORTHOPHOTOS::GEOPORTAIL:OGC:WMTS(0.46)&permalink=yes
-            </span>
-          </template>
-          <DsfrInput
+  <div class="container-div">
+  <div class="fr-container-md--fluid outer-div fr-mt-12v">
+      <h1 >Convertir un lien issu du Géoportail</h1>
+          <p>Copier votre lien ou iframe Géoportail dans le champs et lancer la conversion.</p>
+          <div class="row w-100">
+            <DsfrInput
           :disabled="false"
           :labelVisible="false"
-          placeholder="Placeholder"
           type="text"
+          v-model="permalink"
           >
           </DsfrInput>
-        </DsfrFieldset>
-        <DsfrButton
+          <DsfrButton
           primary
-          label="Convertir le permalien"/>
-      </div>
-      <div class="arrow-col">
-        <DsfrButton
-          tertiary
-          no-outline>
-          <VIcon
-            scale="2"
-            name="tdesign:arrow-right"
+          class="input-like"
+          label="Convertir"
+          icon="ri-links-line"
+          @click="onModalOpen"
           />
-        </DsfrButton>
-        <DsfrButton
-          tertiary
-          no-outline>
-          <VIcon
-            scale="2"
-            name="tdesign:arrow-right"
-          />
-        </DsfrButton>
-      </div>
-      <div class="output-col">
-        <DsfrFieldset class="fieldset-class">
-          <template #legend>Permalien compatible cartes.gouv.fr</template>
-          <template #hint>
-            Résultat
-          </template>
-          <DsfrInput
-          :disabled="false"
-          :labelVisible="false"
-          placeholder="Placeholder"
-          type="text"
-          >
-          </DsfrInput>
-        </DsfrFieldset>
-        <DsfrFieldset class="fieldset-class">
-          <template #legend>Iframe compatible cartes.gouv.fr</template>
-          <template #hint>
-            Résultat
-          </template>
-          <DsfrInput
-          :disabled="false"
-          :labelVisible="false"
-          placeholder="Placeholder"
-          type="text"
-          >
-          </DsfrInput>
-        </DsfrFieldset>
-        
+          </div>
+          <div class="fr-hint-text w-100 fr-mt-7v">
+            Exemple de lien attendu : https://www.geoportail.gouv.fr/cartec=2.705841350773468,48.768240377068594&z=10&l0=GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2::GEOPORTAIL:OGC:WMTS(1)&l1=ORTHOIMAGERY.ORTHOPHOTOS::GEOPORTAIL:OGC:WMTS(0.46)&permalink=yes
+          </div>
+          <DsfrHighlight 
+            class="fr-mt-12v fr-mb-12v"
+            text="Vous avez inséré sur votre site une carte créée sur le Géoportail ou partagé une donnée du Géoportail via les réseaux sociaux. Copiez ce lien dans le convertisseur pour le rendre compatible avec cartes.gouv.fr. En cas de besoin, contactez nos équipes."
+            />
       </div>
     </div>
-  </div>
+    <ResultModal
+      ref="resultModal"
+      :permalink="permalink"
+
+    />
 </template>
 
 <style>
-.page-title {
-  max-width: 661px;
-  border-bottom: 1px;
-  border-color: var(--background-default-grey);
+.container-div {
+  width: 100%;
+  background-color: var(--background-alt-blue-france);
+  display: flex;
   justify-content: center;
 }
 .outer-div {
-  width:100%;
+  max-width: 65vw;
   display: flex;
   justify-content: center;
   flex-direction: column;
+  align-items: center;
 }
 
 .row { 
  display: flex;
  flex-direction: row;
+ align-items: center;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.input-like {
+  max-height: 30px;
+  margin-top: .5rem;
+  max-height: 2.5rem;
 }
 
 .row-title {
@@ -110,34 +86,6 @@
   justify-content: space-evenly;
 }
 
-.input-col {
-  display: flex;
-  flex-grow: 2;
-  max-width: 30vw;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.arrow-col {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.output-col {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  flex-grow: 2;
-  max-width: 30vw;
-}
-.hint-class {
-  max-width: 30vw;
-
-}
 
 
 </style>

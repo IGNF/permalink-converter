@@ -136,75 +136,6 @@ const quickLinks = computed(() => {
   });
 })
 
-// paramètre pour la barre de navigations
-const route = useRoute()
-
-const navItems: DsfrNavigationProps['navItems'] = [
-  {
-    title: 'Commencer avec cartes.gouv',
-    get active () {
-      return [
-        'Documentation',
-        'Offre',
-        'Nous rejoindre'
-      ].includes(route.name as string)
-    },
-    links: [
-      {
-        to: `${useBaseUrl()}/documentation`,
-        text: 'Documentation',
-      },
-      {
-        to: `${useBaseUrl()}/offre`,
-        text: 'Offre',
-      },
-      {
-        to: `${useBaseUrl()}/nous-rejoindre`,
-        text: 'Nous rejoindre',
-      },
-    ],
-  },
-  {
-    to: `${useBaseUrl()}/catalogue`,
-    text: 'Catalogue',
-  },
-  {
-    to: `/`,
-    text: 'Cartes',
-  },
-  {
-    to: `${useBaseUrl()}/actualites`,
-    text: 'Actualités',
-  },
-  {
-    title: 'Assistance',
-    get active () {
-      return [
-        'Questions fréquentes',
-        'Nous écrire',
-        'Niveau de service'
-      ].includes(route.name as string)
-    },
-    links: [
-      {
-        to: `${useBaseUrl()}/faq`,
-        text: 'Questions fréquentes',
-      },
-      {
-        to: `${useBaseUrl()}/nous-ecrire`,
-        text: 'Nous écrire',
-      },
-      {
-        to: `${useBaseUrl()}/niveau-de-service`,
-        text: 'Niveau de service',
-      },
-    ],
-  },
-  {
-    to: `${useBaseUrl()}/a-propos`,
-    text: '\u00C0 propos',
-  }
-]
 </script>
 
 <template>
@@ -216,11 +147,6 @@ const navItems: DsfrNavigationProps['navItems'] = [
     :logo-text="headerParams.logoText"
     :quick-links="quickLinks"
   >
-    <template #mainnav>
-      <DsfrNavigation
-        :nav-items="navItems"
-      />
-    </template>
   </DsfrHeader>
 
   <DsfrAlert
