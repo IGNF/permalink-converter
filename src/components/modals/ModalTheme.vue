@@ -3,10 +3,6 @@ import LogoSun from "@gouvfr/dsfr/dist/artwork/pictograms/environment/sun.svg";
 import LogoMoon from "@gouvfr/dsfr/dist/artwork/pictograms/environment/moon.svg";
 import LogoSystem from "@gouvfr/dsfr/dist/artwork/pictograms/system/system.svg";
 
-// plugin local
-import { useEulerian } from '@/plugins/Eulerian.js';
-const eulerian = useEulerian();
-
 // gestion de la modale de changement de thème d'affichage
 
 // recuperation du theme
@@ -56,13 +52,10 @@ const themeModalOpened = ref(false);
 
 const openModalTheme = () => {
   themeModalOpened.value = true;
-  eulerian.pause(); // HACK on desactive la collecte afin d'ouvrir la modale
 }
 
 const onModalThemeClose = () => {
   themeModalOpened.value = false;
-  // HACK on reactive la collecte si besoin
-  eulerian.resume();
 }
 
 defineExpose({

@@ -4,8 +4,6 @@ import {
   createWebHistory } 
 from 'vue-router'
 
-import Login from '../views/Login.vue'
-import Logout from '../views/Logout.vue'
 import PermalinkConverter from '../views/PermalinkConverter.vue'
 
 const MAIN_TITLE = 'Le service public des cartes et données du territoire | cartes.gouv.fr'
@@ -14,18 +12,8 @@ const MAIN_TITLE = 'Le service public des cartes et données du territoire | car
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'Carte',
+    name: 'permalink-converter',
     component: PermalinkConverter,
-  },
-  {
-    path: '/login',
-    name: 'Se connecter',
-    component: Login
-  },
-  {
-    path: '/logout',
-    name: 'Se deconnecter',
-    component: Logout
   }
 ]
 
