@@ -6,12 +6,13 @@ const props = defineProps({
 });
 
 const convertedPermalink = computed(() => {
+    return "https://cartes.gouv.fr/cartes?c=7.63448632639772,43.807557190408374&z=11&l=ORTHOIMAGERY.ORTHOPHOTOS$GEOPORTAIL:OGC:WMTS(1;1;0)&w=LayerSwitcher,OverviewMap,SearchEngine,ScaleLine,GetFeatureInfo,Legends,Zoom,FullScreen,Share,Print,Territories,LayerImport,ControlList,ContextMenu&permalink=yes";
     return props.permalink;
 })
 
 const iframe = computed(() => {
  return `<iframe
-    width="600" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+    width="700" height="495" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
     sandbox="allow-forms allow-scripts allow-same-origin"
     src="${convertedPermalink.value}"
     allowfullscreen>

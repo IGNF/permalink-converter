@@ -9,7 +9,9 @@
     "build": "vite build",
     "format": "eslint . --fix",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@badgateway/oauth2-client": "^2.4.2",
@@ -40,6 +42,7 @@
     "@vue/tsconfig": "^0.4.0",
     "eslint": "^8.55.0",
     "eslint-plugin-vue": "^9.19.2",
+    "gh-pages": "^6.3.0",
     "npm-run-all2": "^6.1.2",
     "oh-vue-icons": "1.0.0-rc3",
     "rimraf": "^5.0.5",
