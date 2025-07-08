@@ -10,8 +10,7 @@ const convertedPermalink = ref(props.permalink);
 const iframe = computed(() => {
   return `<iframe
     width="700" height="495" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-    sandbox="allow-forms allow-scripts allow-same-origin"
-    src="${props.permalink}"
+    src="${convertedPermalink.value}"
     allowfullscreen>
   </iframe>`;
 });
@@ -48,7 +47,7 @@ defineExpose({
           >
           <template #label>
             <TextCopyToClipboard
-              :copiedText="permalink"
+              :copiedText="convertedPermalink"
               label="Lien permanent"
               description=""
             />
@@ -89,7 +88,7 @@ defineExpose({
         />
       </div>
       <div class="map-col">
-        <!-- <div v-html="iframe"></div> -->
+        <div v-html="iframe"></div>
         </div>
       </div>
     </DsfrModal>

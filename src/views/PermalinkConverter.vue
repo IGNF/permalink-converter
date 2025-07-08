@@ -5,8 +5,8 @@ const permalink = ref("https://www.geoportail.gouv.fr/carte?c=2.3159834794788225
 const resultModal = ref(null);
 const error = ref(false);
 const convertedPermalink = ref('');
-async function onModalOpen() {
-  await fetchConvertedPermalink();
+function onModalOpen() {
+  fetchConvertedPermalink();
 }
 
 // Fonction pour récupérer le lien via fetch
@@ -15,25 +15,41 @@ const permalinkParams = computed(() => {
     return '';
   }
   // Extraire les paramètres de la chaîne de requête
-  const url = new URL(permalink.value);
-  return url.pathname + url.search;
+  try {
+    const url = new URL(permalink.value);
+    return url.pathname + url.search;
+  } catch (e) {
+    error.value = true;
+    alert.value.closed = false;
+    alert.value.title = 'Erreur de format de lien';
+    alert.value.description = e.message || 'Le lien fourni n’est pas valide.';
+  }
 });
 
 const fetchConvertedPermalink = async () => {
+  if (!permalinkParams.value) {
+    error.value = true;
+    alert.value.closed = false;
+    return;
+  }
   const url = 'https://geoportail-redirection.dev.ign-mut.ovh' + permalinkParams.value + "&I=1";
+  if (error.value) {
+    error.value = false;
+    return
+  }
+  window.localStorage.clear();
   fetch(url)
     .then((response) => {
       return response.text();
     })
     .then((text) => {      
         convertedPermalink.value = text;
-        console.log(convertedPermalink.value)
         if (convertedPermalink.value.includes("&e=")) {
-        error.value = true;
-        alert.value.closed = false;
-        alert.value.title = 'Erreur format URL';
-        alert.value.description = convertedPermalink.value.split("&e=")[1].split("|");
-        throw new Error(alert.value.description);
+          error.value = true;
+          alert.value.closed = false;
+          alert.value.title = 'Erreur format URL';
+          alert.value.description = convertedPermalink.value.split("&e=")[1].split("|");
+          throw new Error(alert.value.description);
       }
       else {
         resultModal.value.onModalOpen();
@@ -42,6 +58,7 @@ const fetchConvertedPermalink = async () => {
     .catch((err) => {
       error.value = true;
       alert.value.closed = false;
+      alert.value.title = "Erreur";
       alert.value.description = err.message || 'Une erreur est survenue lors de la récupération du lien converti.';
       throw new Error(err);
     });
