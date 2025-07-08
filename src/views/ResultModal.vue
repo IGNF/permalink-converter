@@ -5,6 +5,8 @@ const props = defineProps({
   permalink: String,
 });
 
+const convertedPermalink = ref(props.permalink);
+
 const iframe = computed(() => {
   return `<iframe
     width="700" height="495" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
@@ -39,14 +41,14 @@ defineExpose({
         <div class="w-100">
             <DsfrInput
             v-model="convertedPermalink"
-            :placeholder="convertedPermalink"
+            :placeholder="permalink"
             label-visible
             readonly
             descriptionId=""
           >
           <template #label>
             <TextCopyToClipboard
-              :copiedText="convertedPermalink"
+              :copiedText="permalink"
               label="Lien permanent"
               description=""
             />
@@ -87,7 +89,7 @@ defineExpose({
         />
       </div>
       <div class="map-col">
-        <div v-html="iframe"></div>
+        <!-- <div v-html="iframe"></div> -->
         </div>
       </div>
     </DsfrModal>
@@ -108,6 +110,11 @@ defineExpose({
   flex-direction: column;
   flex-grow: 1;
   max-width: 30vw;
+}
+.row { 
+ display: flex;
+ flex-direction: row;
+ align-items: center;
 }
 
 .map-col {

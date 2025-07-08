@@ -1,12 +1,12 @@
 <script setup>
 import ResultModal from './ResultModal.vue';
 
-const permalink = ref("https://www.geoportail.gouv.fr/carte?c=2.765163483556678,48.41229536131638&z=12&l0=GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2::GEOPORTAIL:OGC:WMTS(1)&d1=4762965(1;h)&v2=PLAN.IGN::GEOPORTAIL:GPP:TMS(0.71;s:standard)&l3=ORTHOIMAGERY.ORTHOPHOTOS::GEOPORTAIL:OGC:WMTS(0.55)&permalink=yes");
+const permalink = ref("https://www.geoportail.gouv.fr/carte?c=2.3159834794788225,47.206208330402916&z=6&l0=ORTHOIMAGERY.ORTHOPHOTOS::GEOPORTAIL:OGC:WMTS(1)&permalink=yes");
 const resultModal = ref(null);
 const error = ref(false);
 const convertedPermalink = ref('');
-function onModalOpen() {
-  fetchConvertedPermalink();
+async function onModalOpen() {
+  await fetchConvertedPermalink();
 }
 
 // Fonction pour récupérer le lien via fetch
@@ -19,20 +19,29 @@ const permalinkParams = computed(() => {
   return url.pathname + url.search;
 });
 
-const fetchConvertedPermalink = () => {
-  const url = 'https://geoportail-redirection.dev.ign-mut.ovh/' + permalinkParams.value + "&I=1"; //"&debug=1"
+const fetchConvertedPermalink = async () => {
+  const url = 'https://geoportail-redirection.dev.ign-mut.ovh' + permalinkParams.value + "&I=1";
   fetch(url)
     .then((response) => {
       return response.text();
     })
-    .then((text) => {
-      resultModal.value.onModalOpen();
-      convertedPermalink.value = text;
+    .then((text) => {      
+        convertedPermalink.value = text;
+        console.log(convertedPermalink.value)
+        if (convertedPermalink.value.includes("&e=")) {
+        error.value = true;
+        alert.value.closed = false;
+        alert.value.title = 'Erreur format URL';
+        alert.value.description = convertedPermalink.value.split("&e=")[1].split("|");
+        throw new Error(alert.value.description);
+      }
+      else {
+        resultModal.value.onModalOpen();
+      }
     })
     .catch((err) => {
       error.value = true;
       alert.value.closed = false;
-      alert.value.title = 'Erreur réseau';
       alert.value.description = err.message || 'Une erreur est survenue lors de la récupération du lien converti.';
       throw new Error(err);
     });
