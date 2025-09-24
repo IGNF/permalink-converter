@@ -5,7 +5,9 @@ const props = defineProps({
   permalink: String,
 });
 
-const convertedPermalink = ref('');
+const convertedPermalink = computed(() => {
+  return props.permalink;
+});
 
 const iframe = computed(() => {
   return `<iframe
@@ -26,10 +28,6 @@ const onModalClose = () => {
   emit('closeModal');
 };
 
-onMounted(() => {
-  convertedPermalink.value = props.permalink;
-});
-
 defineExpose({
   onModalClose,
   onModalOpen,
@@ -47,10 +45,9 @@ defineExpose({
         <div class="w-100">
             <DsfrInput
             v-model="convertedPermalink"
-            :placeholder="permalink"
             label-visible
             readonly
-            descriptionId=""
+            descriptionId="1"
           >
           <template #label>
             <TextCopyToClipboard
@@ -65,10 +62,9 @@ defineExpose({
           <div class="w-100">
             <DsfrInput
               v-model="iframe"
-              :placeholder="iframe"
               label-visible
               readonly
-              descriptionId=""
+              descriptionId="2"
             >
             <template #label>
               <TextCopyToClipboard

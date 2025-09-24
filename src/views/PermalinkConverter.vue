@@ -39,17 +39,18 @@ const fetchConvertedPermalink = async () => {
     return
   }
   window.localStorage.clear();
+
   fetch(url)
     .then((response) => {
         return response.text();
     })
     .then((text) => {    
         convertedPermalink.value = text;
-        if (convertedPermalink.value.includes("&e=")) {
+        if (convertedPermalink.value.includes("&amp;e=")) {
           error.value = true;
           alert.value.closed = false;
           alert.value.title = 'Erreur format URL';
-          alert.value.description = convertedPermalink.value.split("&e=")[1].split("|");
+          alert.value.description = convertedPermalink.value.split("&amp;e=")[1].split("|");
           throw new Error(alert.value.description);
       }
       else {
