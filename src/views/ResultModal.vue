@@ -5,15 +5,17 @@ const props = defineProps({
   permalink: String,
 });
 
-const convertedPermalink = ref(props.permalink);
+const convertedPermalink = ref('');
 
 const iframe = computed(() => {
   return `<iframe
     width="700" height="495" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-    src="${convertedPermalink.value}"
+    src="${props.permalink}"
     allowfullscreen>
   </iframe>`;
 });
+
+const emit = defineEmits(['closeModal'])
 
 const ModalOpened = ref(false);
 const onModalOpen = () => {
@@ -21,7 +23,12 @@ const onModalOpen = () => {
 };
 const onModalClose = () => {
   ModalOpened.value = false;
+  emit('closeModal');
 };
+
+onMounted(() => {
+  convertedPermalink.value = props.permalink;
+});
 
 defineExpose({
   onModalClose,

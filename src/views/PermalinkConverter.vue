@@ -23,6 +23,7 @@ const permalinkParams = computed(() => {
     alert.value.closed = false;
     alert.value.title = 'Erreur de format de lien';
     alert.value.description = e.message || 'Le lien fourni n’est pas valide.';
+    return '';
   }
 });
 
@@ -32,7 +33,7 @@ const fetchConvertedPermalink = async () => {
     alert.value.closed = false;
     return;
   }
-  const url = 'https://geoportail-redirection.dev.ign-mut.ovh' + permalinkParams.value + "&I=1";
+  const url = 'https://geoportail-redirection.dev.ign-mut.ovh' + permalinkParams.value + "&i=1";
   if (error.value) {
     error.value = false;
     return
@@ -40,9 +41,9 @@ const fetchConvertedPermalink = async () => {
   window.localStorage.clear();
   fetch(url)
     .then((response) => {
-      return response.text();
+        return response.text();
     })
-    .then((text) => {      
+    .then((text) => {    
         convertedPermalink.value = text;
         if (convertedPermalink.value.includes("&e=")) {
           error.value = true;
@@ -76,6 +77,14 @@ const alert = ref({
 });
 
 const onCloseError = () => {
+  alert.value.closed = true;
+};
+
+const resetConverter = () => {
+  window.localStorage.clear();
+  permalink.value = '';
+  convertedPermalink.value = '';
+  error.value = false;
   alert.value.closed = true;
 };
 </script>
@@ -125,7 +134,7 @@ const onCloseError = () => {
     <ResultModal
       ref="resultModal"
       :permalink="convertedPermalink"
-
+      @close-modal="resetConverter"
     />
 </template>
 
