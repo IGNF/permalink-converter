@@ -1,6 +1,6 @@
 {
   "name": "permalink-converter",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "clean:dist": "rimraf dist",
