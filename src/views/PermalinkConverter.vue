@@ -44,8 +44,8 @@ const fetchConvertedPermalink = async () => {
     .then((response) => {
         return response.text();
     })
-    .then((text) => {    
-        convertedPermalink.value = text;
+    .then((text) => {
+        convertedPermalink.value = text.replace("fromgpp=1", "");
         if (convertedPermalink.value.includes("&amp;e=")) {
           error.value = true;
           alert.value.closed = false;
@@ -112,9 +112,9 @@ const resetConverter = () => {
           />
           </div>
           <div class="fr-hint-text w-100 fr-mt-7v">
-            Exemple de lien attendu : https://www.geoportail.gouv.fr/carte?c=2.765163483556678,48.41229536131638&z=12&l0=GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2::GEOPORTAIL:OGC:WMTS(1)&d1=4762965(1;h)&v2=PLAN.IGN::GEOPORTAIL:GPP:TMS(0.71;s:standard)&l3=ORTHOIMAGERY.ORTHOPHOTOS::GEOPORTAIL:OGC:WMTS(0.55)&permalink=yes 
+            Exemple de lien attendu : https://www.geoportail.gouv.fr/carte?c=2.765163483556678,48.41229536131638&z=12&l0=GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2::GEOPORTAIL:OGC:WMTS(1)&d1=4762965(1;h)&v2=PLAN.IGN::GEOPORTAIL:GPP:TMS(0.71;s:standard)&l3=ORTHOIMAGERY.ORTHOPHOTOS::GEOPORTAIL:OGC:WMTS(0.55)&permalink=yes
           </div>
-          <DsfrHighlight 
+          <DsfrHighlight
             class="fr-mt-12v fr-mb-12v"
             text="Vous avez inséré sur votre site une carte créée sur le Géoportail ou partagé une donnée du Géoportail via les réseaux sociaux. Copiez ce lien dans le convertisseur pour le rendre compatible avec cartes.gouv.fr. En cas de besoin, contactez nos équipes."
             />
@@ -158,7 +158,7 @@ const resetConverter = () => {
   align-items: center;
 }
 
-.row { 
+.row {
  display: flex;
  flex-direction: row;
  align-items: center;
