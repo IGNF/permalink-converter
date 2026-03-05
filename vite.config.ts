@@ -50,7 +50,7 @@ export default defineConfig({
       ],
     }),
   ],
-  base: process.env.BASE_URL || '/permalink-converter',
+  base: process.env.BASE_URL || '/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
