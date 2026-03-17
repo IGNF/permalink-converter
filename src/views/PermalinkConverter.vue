@@ -32,6 +32,8 @@ const fetchConvertedPermalink = async () => {
   if (!permalinkParams.value) {
     error.value = true
     alert.value.closed = false
+    alert.value.title = 'Lien manquant'
+    alert.value.description = 'Veuillez fournir un lien à convertir.'
     return;
   }
   const url = `https://geoportail.dev.ign-mut.ovh${  permalinkParams.value  }&i=1`;
@@ -96,7 +98,7 @@ function resetConverter () {
     <div class="fr-container-md--fluid outer-div fr-mt-12v">
       <h1>Convertir un lien issu du Géoportail</h1>
       <p>Copier votre lien ou iframe Géoportail dans le champs et lancer la conversion.</p>
-      <div class="row w-100">
+      <div class="row w-90">
         <DsfrInput
           :disabled="false"
           :label-visible="false"
@@ -111,7 +113,7 @@ function resetConverter () {
           @click="onModalOpen"
         />
       </div>
-      <div class="fr-hint-text w-100 fr-mt-7v">
+      <div class="fr-hint-text w-90 fr-mt-7v">
         Exemple de lien attendu : https://www.geoportail.gouv.fr/carte?c=2.765163483556678,48.41229536131638&z=12&l0=GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2::GEOPORTAIL:OGC:WMTS(1)&d1=4762965(1;h)&v2=PLAN.IGN::GEOPORTAIL:GPP:TMS(0.71;s:standard)&l3=ORTHOIMAGERY.ORTHOPHOTOS::GEOPORTAIL:OGC:WMTS(0.55)&permalink=yes
       </div>
       <DsfrHighlight
@@ -164,7 +166,7 @@ function resetConverter () {
  align-items: center;
 }
 
-.w-100 {
+.w-90 {
   width: 100%;
 }
 

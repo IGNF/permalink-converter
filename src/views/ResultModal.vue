@@ -42,7 +42,7 @@ defineExpose({
       @close="onModalClose">
       <div class="row justify-space-between">
         <div class="output-col">
-        <div class="w-100">
+        <div class="w-90">
             <DsfrInput
             v-model="convertedPermalink"
             label-visible
@@ -59,7 +59,7 @@ defineExpose({
           </DsfrInput>
           </div>
           <hr/>
-          <div class="w-100">
+          <div class="w-90">
             <DsfrInput
               v-model="iframe"
               label-visible
@@ -79,12 +79,12 @@ defineExpose({
           
 
           <DsfrHighlight 
-            class="fr-mt-12v fr-mb-12v w-100 custom-fr-highlight"
+            class="fr-mt-12v fr-mb-12v w-90 custom-fr-highlight"
             text="Reconstituer votre iframe en insérant ce lien compatible cartes.gouv.fr dans son code html"
             />
         
         <DsfrButton
-          class="w-100 justify-center"
+          class="w-90 justify-center"
           secondary
           label="Lancer une nouvelle conversion"
           @click="onModalClose"
