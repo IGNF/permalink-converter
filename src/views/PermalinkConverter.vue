@@ -36,7 +36,8 @@ const fetchConvertedPermalink = async () => {
     alert.value.description = 'Veuillez fournir un lien à convertir.'
     return;
   }
-  const url = `https://geoportail.dev.ign-mut.ovh${  permalinkParams.value  }&i=1`;
+
+  const url = 'https://www.geoportail.gouv.fr' + permalinkParams.value + "&i=1";
   if (error.value) {
     error.value = false
     return
