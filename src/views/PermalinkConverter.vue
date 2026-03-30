@@ -98,7 +98,7 @@ function resetConverter () {
   <div class="container-div">
     <div class="fr-container-md--fluid outer-div fr-mt-12v">
       <h1>Convertir un lien issu du Géoportail</h1>
-      <p>Copier votre lien ou iframe Géoportail dans le champs et lancer la conversion.</p>
+      <p>Copiez votre lien ou iframe Géoportail dans le champ et lancez la conversion.</p>
       <div class="row w-90">
         <DsfrInput
           :disabled="false"
@@ -119,8 +119,9 @@ function resetConverter () {
       </div>
       <DsfrHighlight
         class="fr-mt-12v fr-mb-12v"
-        text="Vous avez inséré sur votre site une carte créée sur le Géoportail ou partagé une donnée du Géoportail via les réseaux sociaux. Copiez ce lien dans le convertisseur pour le rendre compatible avec cartes.gouv.fr. En cas de besoin, contactez nos équipes."
-      />
+      >
+        Vous avez inséré sur votre site une carte créée sur le Géoportail ou partagé une donnée du Géoportail via les réseaux sociaux ? Copiez ce lien dans le convertisseur pour le rendre compatible avec cartes.gouv.fr. En cas de besoin, <a href="https://cartes.gouv.fr/aide/fr/nous-ecrire/" target="_blank">contactez nos équipes.</a>
+      </DsfrHighlight>
       <DsfrAlert
         :type="alert.type"
         :title="alert.title"
