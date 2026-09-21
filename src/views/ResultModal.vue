@@ -9,10 +9,17 @@ const convertedPermalink = computed(() => {
   return props.permalink;
 });
 
+const iframePermalink = computed(() => {
+  return props.permalink.replace(
+    '/explorer-les-cartes?',
+    '/explorer-les-cartes/embed?'
+  );
+});
+
 const iframe = computed(() => {
   return `<iframe
     width="700" height="495" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-    src="${props.permalink}"
+    src="${iframePermalink.value}"
     allowfullscreen>
   </iframe>`;
 });

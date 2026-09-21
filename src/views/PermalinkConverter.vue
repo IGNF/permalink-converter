@@ -5,6 +5,17 @@ const permalink = ref('https://www.geoportail.gouv.fr/carte?c=2.3159834794788225
 const resultModal = ref(null)
 const error = ref(false)
 const convertedPermalink = ref('')
+
+function normalizeGeoportailPermalink(input) {
+  const url = new URL(input)
+
+  if (url.pathname === '/embed/visu.html') {
+    url.pathname = '/carte'
+  }
+
+  return url
+}
+
 function onModalOpen () {
   fetchConvertedPermalink()
 }
@@ -16,7 +27,7 @@ const permalinkParams = computed(() => {
   }
   // Extraire les paramètres de la chaîne de requête
   try {
-    const url = new URL(permalink.value)
+    const url = normalizeGeoportailPermalink(permalink.value)
     return url.pathname + url.search
   }
  catch (e) {
@@ -115,7 +126,7 @@ function resetConverter () {
         />
       </div>
       <div class="fr-hint-text w-90 fr-mt-7v">
-        Exemple de lien attendu : https://www.geoportail.gouv.fr/carte?c=2.765163483556678,48.41229536131638&z=12&l0=GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2::GEOPORTAIL:OGC:WMTS(1)&d1=4762965(1;h)&v2=PLAN.IGN::GEOPORTAIL:GPP:TMS(0.71;s:standard)&l3=ORTHOIMAGERY.ORTHOPHOTOS::GEOPORTAIL:OGC:WMTS(0.55)&permalink=yes
+        Exemple de lien attendu : https://www.geoportail.gouv.fr/carte?c=2.765163483556678,48.41229536131638&z=12&l0=GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2::GEOPORTAIL:OGC:WMTS(1)&d1=4762965(1;h)&v2=PLAN.IGN::GEOPORTAIL:GPP:TMS(0.71;s:standard)&l3=ORTHOIMAGERY.ORTHOPHOTOS::GEOPORTAIL:OGC:WMTS(0.55)&permalink=yes ou https://www.geoportail.gouv.fr/embed/visu.html?c=2,47&z=6&l0=ORTHOIMAGERY.ORTHOPHOTOS::GEOPORTAIL:OGC:WMTS(1)&permalink=yes
       </div>
       <DsfrHighlight
         class="fr-mt-12v fr-mb-12v"
